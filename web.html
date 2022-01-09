@@ -1,0 +1,169 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PokeWeb</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/resources/demos/style.css">
+  <link rel="icon" href="poke_logo.png">
+  <style>
+  #dialog label, #dialog input { display:block; }
+  #dialog label { margin-top: 0.5em; }
+  #dialog input, #dialog textarea { width: 100%; }
+  #tabs { margin-top: 1em; }
+  #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer;}
+  #tabs li .ui-icon-close:hover { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; background-color:red;}
+  #add_tab { cursor: pointer; }
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 9px;
+}
+body {
+	background-color:#ff000000;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ff000000;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #000000;
+}
+#add_tab {
+	background-color:#00000000;
+	border-color:#00000000;
+}
+#add_tab:hover {
+	background-color:#000000;
+	border-color:#00000000;
+}
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var tabTitle = $( "#tab_title" ),
+      tabContent = $( "#tab_content" ),
+      tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>",
+      tabCounter = 2;
+ 
+    var tabs = $( "#tabs" ).tabs();
+ 
+    // Modal dialog init: custom buttons and a "close" callback resetting the form inside
+    var dialog = $( "#dialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        Add: function() {
+          addTab();
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+      }
+    });
+ 
+    // AddTab form: calls addTab function on submit and closes the dialog
+    var form = dialog.find( "form" ).on( "submit", function( event ) {
+      addTab();
+      dialog.dialog( "close" );
+      event.preventDefault();
+    });
+ 
+    // Actual addTab function: adds new tab using the input from the form above
+    function addTab() {
+      var label = tabTitle.val() || "Tab " + tabCounter,
+        id = "tabs-" + tabCounter,
+        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+        tabContentHtml = tabContent.val() || "";
+ 
+      tabs.find( ".ui-tabs-nav" ).append( li );
+      tabs.append( "<div id='" + id + "'><iframe src='https://www.bing.com' height=380px width=100%></iframe><p>" + tabContentHtml + "</p></div>" );
+      tabs.tabs( "refresh" );
+      tabCounter++;
+    }
+ 
+    // AddTab button: just opens the dialog
+    $( "#add_tab" )
+      .button()
+      .on( "click", function() {
+        dialog.dialog( "open" );
+      });
+ 
+    // Close icon: removing the tab on click
+    tabs.on( "click", "span.ui-icon-close", function() {
+      var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+      $( "#" + panelId ).remove();
+      tabs.tabs( "refresh" );
+    });
+ 
+    tabs.on( "keyup", function( event ) {
+      if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+        var panelId = tabs.find( ".ui-tabs-active" ).remove().attr( "aria-controls" );
+        $( "#" + panelId ).remove();
+        tabs.tabs( "refresh" );
+      }
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<ul>
+  <li style="float:right"><button id="add_tab"><img src='poke_logo.png' width=27px></button></li>
+</ul>
+
+<div id="dialog" title="">
+  <form>
+    <fieldset class="ui-helper-reset">
+      <label for="tab_title">Title</label>
+      <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all">
+    </fieldset>
+  </form>
+</div>
+ 
+
+ 
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Bing</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+  </ul>
+  <div id="tabs-1">
+    <iframe src='https://www.bing.com' height=380px width=100%></iframe>
+  </div>
+</div>
+ 
+ 
+</body>
+</html>

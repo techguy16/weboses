@@ -1,0 +1,470 @@
+<html lang = "en">
+   <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset = "utf-8">
+      <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      
+      <!-- CSS -->
+      <style>
+         .ui-widget-header,.ui-state-default, ui-button {
+            background:#ff00000;
+            border: 1px solid #ff000000;
+            color: #ffffff;
+            font-weight: normal;
+         }
+		 .ui-dialog-titlebar {
+			background-color:#ff000000;
+		}
+		.ui-dialog {
+			background-color:#ff000050;
+		}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ff000050;
+  margin-left: -10px;
+  z-index:1000;
+}
+
+li {
+  float: left;
+  z-index: -1;
+  position:relative;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+}
+
+		 ul {
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+		 }
+#txt {
+	color:white;
+	padding:11px;
+	font-family:Open Sans, Segoe UI, sans-serif;
+}
+body {
+	 background-image: url('pokewall.jpg');
+	 background-repeat: no-repeat;
+	 background-attachment: fixed;
+	 background-size: cover;
+}
+
+.openapp {
+  transition-duration: 0.4s;
+  padding: 0px 15px;
+  background-color:#ff000050;
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#openapp:hover {
+  background-color: #111; /* Green */
+  color: white;
+}
+button {
+  transition-duration: 0.4s;
+  padding: 0px 15px;
+  background-color:#ff000000;
+  border-color:#00000000;
+  width:100%;
+  height:44px;
+  color:white;
+}
+button:hover {
+  background-color: #111; /* Green */
+  color: white;
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  color: #595959;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  overflow: hidden;
+}
+@-webkit-keyframes slideDown {
+    0%, 100% { -webkit-transform: translateY(-50px); }
+    10%, 90% { -webkit-transform: translateY(0px); }
+}
+#note {
+    position: absolute;
+	color:black;
+    z-index: 101;
+    bottom: 60;
+    left: 500;
+    right: 500;
+    background: #ff000050;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden; 
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow:    0 0 5px black;
+    box-shadow:         0 0 5px black;
+}
+#draggable { width: 150px; height: 150px; padding: 0em; background-color:#00000000; border-color:#00000000}
+#draggable2 { width: 250px; height: 90px; padding: 0em; background-color:#00000000; border-color:#00000000}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 10px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+      </style>
+      
+      <!-- Javascript -->
+      <script>
+         $(function() {
+            $( "#dialog-1" ).dialog({
+               autoOpen: false,  
+               width: 800,
+			   maxHeight:620,
+			   minHeight:620,
+               height: 620,
+            });
+            $( "#opener" ).click(function() {
+               $( "#dialog-1" ).dialog( "open" );
+			   $( "#dialogApp" ).dialog( "close" );
+            });
+         });
+      </script>
+      <script>
+         $(function() {
+            $( "#dialog-2" ).dialog({
+               autoOpen: false,
+               width: 700,
+               height: 400,
+			   maxWidth: 700,
+               maxHeight: 400,
+			   minWidth: 700,
+               minHeight: 400,
+            });
+            $( "#openers" ).click(function() {
+               $( "#dialog-2" ).dialog( "open" );
+			   $( "#dialogApp" ).dialog( "close" );
+            });
+         });
+       </script>
+      <script>
+         $(function() {
+            $( "#dialog-3" ).dialog({
+               autoOpen: false,
+               width: 340,
+               height: 475,
+            });
+            $( "#openit" ).click(function() {
+               $( "#dialog-3" ).dialog( "open" );
+			   $( "#dialogApp" ).dialog( "close" );
+            });
+         });
+       </script>
+	   <script>
+         $(function() {
+            $( "#dialog-4" ).dialog({
+               autoOpen: false,
+               width: 340,
+               height: 475,
+            });
+            $( "#openpaint" ).click(function() {
+               $( "#dialog-4" ).dialog( "open" );
+			   $( "#dialogApp" ).dialog( "close" );
+            });
+         });
+       </script>
+	   <script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML =
+  h + ":" + m + ":" + s;
+  var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+ <script>
+         $(function() {
+            $( "#dialogApp" ).dialog({
+               autoOpen: false,
+               width: 300,
+               height: 500,
+            });
+            $( "#openapp" ).click(function() {
+               $( "#dialogApp" ).dialog( "open" );
+            });
+         });
+       </script>
+	   <script>
+         $(function() {
+            $( "#dialog-5" ).dialog({
+               autoOpen: false,
+               width: 700,
+               height: 350,
+            });
+            $( "#term" ).click(function() {
+               $( "#dialog-5" ).dialog( "open" );
+			   $( "#dialogApp" ).dialog( "close" );
+            });
+         });
+       </script>
+	   <script>
+setTimeout(fade_out, 5000);
+
+function fade_out() {
+  $("#note").fadeOut().empty();
+}
+</script>
+<script>
+  $( function() {
+    $( "#draggable" ).draggable({ grid: [ 150, 150 ] });
+  } );
+  </script>
+  <script>
+  $( function() {
+    $( "#draggable2" ).draggable({ grid: [ 150, 150 ] });
+  } );
+  </script>
+   </head>
+  
+   <body onload="startTime()">
+
+<div id="draggable" class="ui-widget-content">
+<canvas id="canvas" width="150" height="150"
+style="background-color:#00000000">
+</canvas>
+
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+</div>
+<div id="draggable2" class="ui-widget-content">
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
+</div>
+	<div id="note">
+    Welcome to PokeOS!
+</div>
+	
+      <ul>
+		<li><button id='openapp'><img src='poke_logo.png' style='width:41px;'></button></li>
+		<li style="float:right"><div id="txt"></div></li>
+	   </ul>
+</div>
+	   <!-- HTML --> 
+      <div id="dialog-1" title="PokeWeb">
+          <iframe src="web.html" allowtransparency="true" width="100%" height="100%" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+       </div>
+       <div id="dialog-2" title="Text Editor">
+           <textarea name="text" rows="18" cols="80"></textarea>
+       </div>
+     <div id="dialog-3" title="Solitare Online">
+         <iframe src="https://www.google.com/logos/fnbx/solitaire/standalone.html" allowtransparency="true" width="100%" height="100%" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+       </div>
+	   <div id="dialog-4" title="Paint">
+         <iframe src="https://jspaint.app" allowtransparency="true" width="100%" height="100%" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+       </div>
+	   <div id="dialog-5" title="Terminal">
+		 <iframe src="terminal.html" allowtransparency="true" width="100%" height="100%" frameborder="0" scrolling="yes" allowfullscreen></iframe>
+       </div>
+	   <div id="dialogApp" title="Apps">
+		 <button id="opener">PokeWeb</button>
+		 <br>
+         <button id='openers'>Text Editor</button>
+		 <br>
+		 <button id='openit'>Solitare</button>
+		 <br>
+		 <button id='openpaint'>Paint</button>
+		 <br>
+		 <button id='term'>Terminal</button>
+       </div>
+       <br>
+       <br>
+       
+       <br>
+       <br>
+       
+       <br>
+       <br>
+       
+	   <br>
+</body>
+</html>
